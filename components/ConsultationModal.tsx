@@ -159,7 +159,7 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
               <div className="mt-8 flex justify-end gap-3">
                 <Button variant="text" onClick={onClose} type="button" disabled={isSubmitting}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Transmitting...' : 'Authorize Routing'}
+                  {isSubmitting ? 'Transmitting...' : 'Submit Inquiry'}
                 </Button>
               </div>
             </form>
@@ -168,7 +168,7 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
               <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-50 mb-6">
                 <MailCheck className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="text-xl leading-6 font-bold text-gray-900 mb-2">Routing Complete</h3>
+              <h3 className="text-xl leading-6 font-bold text-gray-900 mb-2">Inquiry Submitted</h3>
               <div className="mt-2 px-4">
                 <p className="text-sm text-gray-500 mb-6">
                   Inquiry logged and routed for architect review.
@@ -183,7 +183,7 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
                   <div className="text-[9px] font-mono text-slate-500 mt-2 uppercase">Verified Gateway: Scalar-Relay-v2</div>
                 </div>
 
-                <Button onClick={onClose} variant="outline" fullWidth>Terminate Session</Button>
+                <Button onClick={onClose} variant="outline" fullWidth>Close Inquiry</Button>
               </div>
             </div>
           )}
