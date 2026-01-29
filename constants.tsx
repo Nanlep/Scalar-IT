@@ -1,60 +1,64 @@
 import React from 'react';
-import { ShieldCheck, Server, Globe, Lock, Cpu, Briefcase, Building2, Landmark, Scale } from 'lucide-react';
-import { NavItem, ServicePillar, TrustedByLogo, InquiryType, OrganizationScale } from './types';
+import { Rocket, Code2, LineChart, Globe2, CheckCircle2, Award, Zap, Users } from 'lucide-react';
+import { NavItem, ServicePillar, InquiryType, OrganizationScale } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Solutions', path: '/solutions' },
-  { label: 'Industries', path: '/industries' },
-  { label: 'Trust & Security', path: '/trust' },
-  { label: 'About Scalar', path: '/about' },
+  { label: 'Services', path: '/solutions' },
+  { label: 'Sectors', path: '/industries' },
+  { label: 'Methodology', path: '/trust' },
+  { label: 'About Us', path: '/about' },
 ];
 
 export const PILLARS: ServicePillar[] = [
   {
-    id: 'financial-infrastructure',
-    title: 'Enterprise Financial Infrastructure',
-    description: 'Core banking systems, payment gateways, and clearing house integrations designed for high-volume, regulated environments.',
-    icon: <Landmark className="w-6 h-6" />,
-    features: ['Real-time Ledger Systems', 'SWIFT/ISO20022 Integration', 'High-Frequency Trading Infra']
+    id: 'tech-development',
+    title: 'Technology Development',
+    description: 'We build world-class digital products with precision. From bespoke web platforms to complex mobile applications, we bring your vision to life.',
+    icon: <Code2 className="w-6 h-6" />,
+    features: ['Custom Software Engineering', 'Mobile App Development', 'SaaS Platform Build'],
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000" // Coding/Laptop
   },
   {
-    id: 'digital-government',
-    title: 'Digital Government & Public Systems',
-    description: 'Sovereign digital identity, revenue collection, and public record management systems built for national scale.',
-    icon: <Building2 className="w-6 h-6" />,
-    features: ['National ID Interoperability', 'Tax & Revenue Platforms', 'Census & Registry Systems']
+    id: 'growth-acceleration',
+    title: 'Growth Acceleration',
+    description: 'Data-driven strategies to scale your impact. We provide the tools, clarity, and marketing execution needed to grow your market share.',
+    icon: <Rocket className="w-6 h-6" />,
+    features: ['Go-to-Market Strategy', 'Performance Marketing', 'Conversion Optimization'],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" // Data/Analytics
   },
   {
-    id: 'cloud-security',
-    title: 'Infrastructure, Cloud & Integration',
-    description: 'Hybrid-cloud architectures that prioritize data sovereignty, latency reduction, and zero-trust security models.',
-    icon: <Server className="w-6 h-6" />,
-    features: ['Sovereign Cloud Architecture', 'Hybrid Data Centers', 'Zero-Trust Networks']
+    id: 'public-sector',
+    title: 'Government & NGO Projects',
+    description: 'Modernizing public services and non-profit operations with cost-effective, high-impact digital solutions.',
+    icon: <Globe2 className="w-6 h-6" />,
+    features: ['Digital Public Infrastructure', 'Donor Management Systems', 'Impact Reporting Tools'],
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000" // Modern Architecture
   },
   {
-    id: 'advisory',
-    title: 'Strategic Advisory & GTM',
-    description: 'Technical due diligence, regulatory alignment strategy, and digital transformation roadmaps for the C-Suite.',
-    icon: <Briefcase className="w-6 h-6" />,
-    features: ['Regulatory Technology (RegTech)', 'Technical Due Diligence', 'Digital Transformation']
+    id: 'digital-advisory',
+    title: 'Digital Advisory & Clarity',
+    description: 'We cut through the noise. Our architects provide top-notch expertise to unblock technical debt and clarify your digital roadmap.',
+    icon: <LineChart className="w-6 h-6" />,
+    features: ['Technical Due Diligence', 'CTO-as-a-Service', 'Digital Transformation'],
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000" // Team Meeting
   }
 ];
 
 export const TRUST_SIGNALS = [
   {
-    title: "Regulatory Alignment",
-    description: "Systems designed to comply with CBN, NDPR, GDPR, and Basel III frameworks by default.",
-    icon: <Scale className="w-8 h-8 text-scalar-red" />
+    title: "Clarity First",
+    description: "We demystify technology. No jargon, just clear roadmaps and transparent execution.",
+    icon: <CheckCircle2 className="w-8 h-8 text-scalar-red" />
   },
   {
-    title: "Security First",
-    description: "ISO 27001 certified processes with end-to-end encryption and HSM integration capability.",
-    icon: <Lock className="w-8 h-8 text-scalar-red" />
+    title: "World-Class Tools",
+    description: "We leverage modern, scalable stacks to ensure your product performs at an elite level.",
+    icon: <Zap className="w-8 h-8 text-scalar-red" />
   },
   {
-    title: "High Availability",
-    description: "Mission-critical SLAs guaranteeing 99.999% uptime for core transaction infrastructure.",
-    icon: <Cpu className="w-8 h-8 text-scalar-red" />
+    title: "Client Satisfaction",
+    description: "Our modest, niched approach ensures every client receives dedicated, white-glove attention.",
+    icon: <Users className="w-8 h-8 text-scalar-red" />
   }
 ];
 
@@ -62,9 +66,9 @@ export const INQUIRY_TYPES = Object.values(InquiryType);
 export const ORG_SCALES = Object.values(OrganizationScale);
 
 export const INDUSTRIES = [
-    "Government & Public Sector",
-    "Banking & Financial Services",
-    "Energy & Utilities",
-    "Telecommunications",
-    "Industrial & Manufacturing"
+    "High-Growth Startups",
+    "Small & Medium Business",
+    "Non-Profits (NGOs)",
+    "Government Agencies",
+    "Impact Organizations"
 ];

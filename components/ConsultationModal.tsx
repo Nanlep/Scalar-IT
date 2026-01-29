@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { X, Loader2, MailCheck, Lock, Shield, AlertCircle } from 'lucide-react';
+import { X, Loader2, CheckCircle, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { INQUIRY_TYPES, ORG_SCALES } from '../constants';
 
@@ -31,11 +30,11 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    setStatusMessage('Establishing secure handshake...');
+    setStatusMessage('Preparing project context...');
 
     try {
       await new Promise(r => setTimeout(r, 600));
-      setStatusMessage('Encrypting payload...');
+      setStatusMessage('Analyzing requirements...');
       
       const response = await fetch('/api/inquiry', {
         method: 'POST',
@@ -57,16 +56,16 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
       }
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Institutional Gateway transmission failed');
+        throw new Error(result.message || 'Submission failed');
       }
       
-      setStatusMessage('Transmission complete.');
+      setStatusMessage('Done.');
       setReferenceId(result.refId);
       setIsSuccess(true);
     } catch (err: any) {
-      console.error("Gateway Error:", err);
-      setError(err.message || 'An institutional gateway error occurred. Please contact enterprise@scalarit.pro directly.');
-      setStatusMessage('Transmission aborted.');
+      console.error("Submission Error:", err);
+      setError(err.message || 'We could not process your request at this moment. Please email hello@scalar.com');
+      setStatusMessage('Error.');
     } finally {
       setIsSubmitting(false);
     }
@@ -82,11 +81,11 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
   return (
     <div className="fixed inset-0 z-[100] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 bg-scalar-dark bg-opacity-75 transition-opacity" aria-hidden="true" onClick={onClose}></div>
+        <div className="fixed inset-0 bg-scalar-dark bg-opacity-60 transition-opacity backdrop-blur-sm" aria-hidden="true" onClick={onClose}></div>
 
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-        <div className="inline-block align-bottom bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-4 border-scalar-red">
+        <div className="inline-block align-bottom bg-white text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full rounded-lg">
           <div className="absolute top-0 right-0 pt-4 pr-4">
             <button onClick={onClose} className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
               <X className="h-6 w-6" />
@@ -94,22 +93,18 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
           </div>
 
           {!isSuccess ? (
-            <form onSubmit={handleSubmit} className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start mb-6">
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                    Enterprise Intake Gateway
-                  </h3>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Requests are processed by our AI Intake Officer and routed to the sector lead.
-                    </p>
-                  </div>
-                </div>
+            <form onSubmit={handleSubmit} className="px-6 pt-8 pb-6">
+              <div className="mb-6">
+                <h3 className="text-xl font-serif font-bold text-gray-900" id="modal-title">
+                  Let's Accelerate Your Growth
+                </h3>
+                <p className="text-sm text-gray-500 mt-2">
+                  Tell us about your project. Our team will review your needs and provide clarity on the next steps.
+                </p>
               </div>
 
               {error && (
-                <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs font-medium flex items-start gap-2">
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs font-medium flex items-start gap-2 rounded">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{error}</span>
                 </div>
@@ -118,72 +113,63 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
               <div className={`space-y-4 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}>
                  <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Inquiry Type</label>
-                      <select name="inquiryType" value={formData.inquiryType} onChange={handleInputChange} className="block w-full border-gray-300 py-2 text-sm border focus:ring-scalar-red focus:border-scalar-red">
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">Service Interest</label>
+                      <select name="inquiryType" value={formData.inquiryType} onChange={handleInputChange} className="block w-full border-gray-200 py-2.5 px-3 text-sm border rounded focus:ring-scalar-red focus:border-scalar-red">
                         {INQUIRY_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Org Scale</label>
-                      <select name="scale" value={formData.scale} onChange={handleInputChange} className="block w-full border-gray-300 py-2 text-sm border focus:ring-scalar-red focus:border-scalar-red">
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">Organization Type</label>
+                      <select name="scale" value={formData.scale} onChange={handleInputChange} className="block w-full border-gray-200 py-2.5 px-3 text-sm border rounded focus:ring-scalar-red focus:border-scalar-red">
                         {ORG_SCALES.map(scale => <option key={scale} value={scale}>{scale}</option>)}
                       </select>
                     </div>
                  </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" name="name" placeholder="Full Name" required value={formData.name} onChange={handleInputChange} className="block w-full text-sm border-gray-300 p-2 border focus:ring-scalar-red focus:border-scalar-red" />
-                    <input type="email" name="email" placeholder="Business Email" required value={formData.email} onChange={handleInputChange} className="block w-full text-sm border-gray-300 p-2 border focus:ring-scalar-red focus:border-scalar-red" />
+                    <input type="text" name="name" placeholder="Your Name" required value={formData.name} onChange={handleInputChange} className="block w-full text-sm border-gray-200 p-2.5 border rounded focus:ring-scalar-red focus:border-scalar-red" />
+                    <input type="email" name="email" placeholder="Work Email" required value={formData.email} onChange={handleInputChange} className="block w-full text-sm border-gray-200 p-2.5 border rounded focus:ring-scalar-red focus:border-scalar-red" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" name="organization" placeholder="Organization" required value={formData.organization} onChange={handleInputChange} className="block w-full text-sm border-gray-300 p-2 border focus:ring-scalar-red focus:border-scalar-red" />
-                    <input type="text" name="role" placeholder="Role / Title" required value={formData.role} onChange={handleInputChange} className="block w-full text-sm border-gray-300 p-2 border focus:ring-scalar-red focus:border-scalar-red" />
+                    <input type="text" name="organization" placeholder="Company / Org Name" required value={formData.organization} onChange={handleInputChange} className="block w-full text-sm border-gray-200 p-2.5 border rounded focus:ring-scalar-red focus:border-scalar-red" />
+                    <input type="text" name="role" placeholder="Your Role" required value={formData.role} onChange={handleInputChange} className="block w-full text-sm border-gray-200 p-2.5 border rounded focus:ring-scalar-red focus:border-scalar-red" />
                   </div>
 
-                  <textarea name="details" rows={3} value={formData.details} onChange={handleInputChange} className="block w-full text-sm border-gray-300 p-2 border focus:ring-scalar-red focus:border-scalar-red" placeholder="Scope and Objectives..."></textarea>
-                  
-                  <div className="bg-slate-50 p-3 rounded text-[10px] text-slate-500 flex items-start gap-2 border border-slate-100">
-                    <Shield className="w-3 h-3 text-slate-400 shrink-0" />
-                    <span>Transmissions are logged for audit compliance under Scalar ISO 27001 protocols.</span>
-                  </div>
+                  <textarea name="details" rows={3} value={formData.details} onChange={handleInputChange} className="block w-full text-sm border-gray-200 p-2.5 border rounded focus:ring-scalar-red focus:border-scalar-red" placeholder="How can we help you grow? (Project goals, challenges, timeline)"></textarea>
               </div>
 
               {isSubmitting && (
-                <div className="mt-4 p-3 bg-slate-900 border border-slate-700 flex items-center gap-3">
-                  <Loader2 className="w-4 h-4 text-scalar-red animate-spin" />
-                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">{statusMessage}</span>
+                <div className="mt-4 flex items-center gap-3 text-sm text-scalar-dark">
+                  <Loader2 className="w-4 h-4 animate-spin text-scalar-red" />
+                  <span>{statusMessage}</span>
                 </div>
               )}
 
               <div className="mt-8 flex justify-end gap-3">
-                <Button variant="text" onClick={onClose} type="button" disabled={isSubmitting}>Cancel</Button>
-                <Button variant="primary" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Transmitting...' : 'Submit Inquiry'}
+                <Button variant="text" onClick={onClose} type="button" disabled={isSubmitting}>Close</Button>
+                <Button variant="primary" type="submit" disabled={isSubmitting} className="rounded">
+                  {isSubmitting ? 'Sending...' : 'Request Discovery Session'}
                 </Button>
               </div>
             </form>
           ) : (
-            <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-center">
+            <div className="px-6 py-12 text-center">
               <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-50 mb-6">
-                <MailCheck className="h-8 w-8 text-green-600" />
+                <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="text-xl leading-6 font-bold text-gray-900 mb-2">Inquiry Submitted</h3>
-              <div className="mt-2 px-4">
-                <p className="text-sm text-gray-500 mb-6">
-                  Inquiry logged and routed for architect review.
-                </p>
-                
-                <div className="bg-slate-900 p-4 rounded border border-slate-700 mb-6 text-left">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">Institutional Ref ID</span>
-                    <Lock className="w-3 h-3 text-slate-600" />
-                  </div>
-                  <div className="font-mono text-lg font-bold text-white tracking-tighter">{referenceId}</div>
-                  <div className="text-[9px] font-mono text-slate-500 mt-2 uppercase">Verified Gateway: Scalar-Relay-v2</div>
-                </div>
+              <h3 className="text-2xl font-serif font-bold text-gray-900 mb-2">Request Received</h3>
+              <p className="text-slate-500 mb-8 max-w-xs mx-auto">
+                Thank you for choosing Scalar. Your project reference ID is below. A growth specialist will be in touch shortly.
+              </p>
+              
+              <div className="bg-slate-50 py-3 px-6 rounded-lg inline-block border border-slate-200 mb-8">
+                <span className="block text-xs text-slate-400 uppercase tracking-widest mb-1">Reference ID</span>
+                <span className="font-mono text-lg font-bold text-scalar-dark">{referenceId}</span>
+              </div>
 
-                <Button onClick={onClose} variant="outline" fullWidth>Close Inquiry</Button>
+              <div>
+                <Button onClick={onClose} fullWidth className="rounded">Return to Homepage</Button>
               </div>
             </div>
           )}

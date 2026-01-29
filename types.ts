@@ -11,6 +11,7 @@ export interface ServicePillar {
   description: string;
   icon: ReactNode;
   features: string[];
+  image: string;
 }
 
 export interface StatItem {
@@ -24,16 +25,17 @@ export interface TrustedByLogo {
 }
 
 export enum InquiryType {
-  STRATEGIC_ADVISORY = "Strategic Advisory",
-  INFRASTRUCTURE_BUILD = "Infrastructure & Platform Build",
-  REGULATORY_COMPLIANCE = "Regulatory & Compliance Systems",
-  GOVERNMENT_PARTNERSHIP = "Government Partnership",
-  OTHER = "Other Inquiry"
+  TECH_DEVELOPMENT = "Technology Development",
+  GROWTH_STRATEGY = "Growth & Acceleration",
+  DIGITAL_TRANSFORMATION = "Digital Transformation",
+  GOV_PROJECT = "Government Project",
+  NGO_IMPACT = "NGO / Impact Project"
 }
 
 export enum OrganizationScale {
-  MID_ENTERPRISE = "Mid-Market Enterprise",
-  LARGE_ENTERPRISE = "Large Enterprise / Multinational",
-  GOVERNMENT_agency = "Government Agency / Ministry",
-  FINANCIAL_INSTITUTION = "Regulated Financial Institution"
+  STARTUP = "Growth Startup (Pre-Series A)",
+  SMB = "Small/Mid-Sized Business",
+  NGO = "Non-Governmental Org",
+  ENTERPRISE = "Large Enterprise",
+  GOVERNMENT = "Government Agency"
 }

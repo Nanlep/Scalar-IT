@@ -1,6 +1,6 @@
 
 /**
- * SCALAR IT - SECURE BACKEND RELAY (SERVERLESS)
+ * SCALAR - GROWTH & TECH SERVICES RELAY
  * -------------------------------------------
  */
 
@@ -18,43 +18,58 @@ export default async function handler(req: any, res: any) {
 
   try {
     // 2. Validate Environment
-    if (!process.env.API_KEY) {
-      return res.status(500).json({ success: false, message: "Infrastructure Error: API_KEY not provisioned." });
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      console.error("GATEWAY_ERROR: API_KEY is missing from environment variables.");
+      return res.status(500).json({ 
+        success: false, 
+        message: "Configuration Error: API Key missing." 
+      });
     }
 
-    // 3. SECURE AI PROCESSING
-    // Initialize inside the handler to ensure fresh environment variable access
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey });
     
-    const aiResponse = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `
-        Analyze this enterprise inquiry for Scalar IT:
-        Client: ${name} (${role}) at ${organization}
-        Scale: ${scale} | Type: ${inquiryType}
-        Context: ${details}
-        
-        Task:
-        1. Generate an Institutional Reference ID (Format: SC-XXXX-2025).
-        2. Summarize the technical scope for the internal lead.
-        
-        Respond ONLY in JSON format.
-        { "refId": "SC-XXXX-2025", "summary": "..." }
-      `,
-      config: { 
-        responseMimeType: "application/json" 
-      }
-    });
+    // Default fallback values
+    let intakeResult = { 
+      refId: `SC-${Math.floor(Math.random()*9000)+1000}`, 
+      summary: "New project inquiry requiring manual review." 
+    };
+    
+    try {
+      const aiResponse = await ai.models.generateContent({
+        model: 'gemini-flash-latest',
+        contents: `
+          Act as a Growth & Technology Consultant for Scalar.
+          Analyze this client inquiry:
+          Client: ${name} (${role}) at ${organization}
+          Segment: ${scale} | Interest: ${inquiryType}
+          Details: ${details}
+          
+          Task:
+          1. Generate a Reference ID (Format: SC-XXXX).
+          2. Create a brief 1-sentence summary of their likely needs (e.g., "Client needs MVP for fintech" or "NGO needs donor database").
+          
+          Respond ONLY in JSON.
+          { "refId": "SC-XXXX", "summary": "..." }
+        `,
+        config: { 
+          responseMimeType: "application/json" 
+        }
+      });
 
-    const responseText = aiResponse.text;
-    if (!responseText) {
-      throw new Error("AI Gateway returned an empty payload.");
+      const responseText = aiResponse.text;
+      if (responseText) {
+        const parsed = JSON.parse(responseText.trim());
+        intakeResult.refId = parsed.refId || intakeResult.refId;
+        intakeResult.summary = parsed.summary || intakeResult.summary;
+      }
+    } catch (aiError: any) {
+      console.error("AI_ANALYSIS_FAILURE:", aiError.message);
     }
 
-    const intakeResult = JSON.parse(responseText.trim());
-    const refId = intakeResult.refId || `SC-${Math.floor(Math.random()*9000)+1000}-2025`;
+    const refId = intakeResult.refId;
 
-    // 4. INSTITUTIONAL AUDIT LOGGING (Supabase) - Non-blocking
+    // 4. LOGGING (Supabase) - Optional
     if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
       try {
         await fetch(`${process.env.SUPABASE_URL}/rest/v1/inquiries`, {
@@ -77,11 +92,11 @@ export default async function handler(req: any, res: any) {
           })
         });
       } catch (logErr) {
-        console.warn("Audit Log ignored:", logErr);
+        console.warn("Log failed:", logErr);
       }
     }
 
-    // 5. SECURE EMAIL ROUTING (Resend) - Optional but recommended
+    // 5. EMAIL NOTIFICATION (Resend)
     if (process.env.RESEND_API_KEY) {
       try {
         await fetch('https://api.resend.com/emails', {
@@ -91,47 +106,40 @@ export default async function handler(req: any, res: any) {
             'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
           },
           body: JSON.stringify({
-            from: 'Scalar IT Gateway <onboarding@resend.dev>',
-            to: ['scalarit@gmail.com'],
+            from: 'Scalar Inbound <onboarding@resend.dev>',
+            to: ['contact@scalarit.pro'],
             reply_to: email,
-            subject: `[INTERNAL] New Enterprise Inquiry: ${refId} - ${organization}`,
+            subject: `New Lead: ${organization} (${inquiryType})`,
             text: `
-              INSTITUTIONAL REFERENCE ID: ${refId}
+              REF: ${refId}
               --------------------------------------------------
-              CLIENT: ${name} (${role})
-              EMAIL: ${email}
-              ORGANIZATION: ${organization} [Scale: ${scale}]
-              TYPE: ${inquiryType}
+              NAME: ${name}
+              ORG: ${organization} (${scale})
               
-              AI SUMMARY:
+              NEEDS:
               ${intakeResult.summary}
               
-              RAW DETAILS:
+              DETAILS:
               ${details}
-              
-              --------------------------------------------------
-              TRANSMITTED VIA SECURE GATEWAY AT: ${new Date().toISOString()}
             `
           })
         });
       } catch (emailErr) {
-        console.warn("Email relay failed, inquiry saved to audit log:", emailErr);
+        console.warn("Email failed:", emailErr);
       }
     }
 
-    // 6. Final Success Response
     return res.status(200).json({ 
       success: true, 
       refId: refId,
-      status: 'ROUTED_TO_SECTOR_LEAD' 
+      message: 'Inquiry received' 
     });
 
   } catch (error: any) {
-    console.error("Gateway Processing Failed:", error);
-    // Explicitly return structured JSON even on fatal errors
+    console.error("Handler Error:", error);
     return res.status(500).json({ 
       success: false, 
-      message: error.message || 'Institutional Gateway Error. Transmission aborted.' 
+      message: 'Processing error.' 
     });
   }
 }
