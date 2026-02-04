@@ -23,13 +23,16 @@ export const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
                 <h4 className="text-scalar-red font-bold uppercase tracking-widest text-sm mb-4">Our Philosophy</h4>
-                <h2 className="text-3xl font-serif font-bold text-scalar-dark mb-6">Bringing Clarity to Chaos</h2>
+                <h2 className="text-3xl font-serif font-bold text-scalar-dark mb-6">Process is the Product</h2>
                 <div className="prose prose-slate text-slate-600 leading-relaxed mb-8">
                     <p className="mb-4">
-                        In the world of technology and growth, there is often too much noise and not enough signal. Projects get bloated, strategies get complicated, and budgets get wasted.
+                        In the world of technology and growth, chaos is the enemy. Projects get bloated, communication breaks down, and budgets are wasted. We believe that growth is a disciplined process, not just a goal.
+                    </p>
+                    <p className="mb-4">
+                        Scalar takes a "modest and niched" approach as a Growth Process Consulting firm. We don't try to reinvent the wheel. Instead, we deploy best-in-class tools like <strong>Meti.pro</strong> for growth strategy and execution, <strong>Asana</strong> for project velocity, and <strong>Notion</strong> for organizational clarity.
                     </p>
                     <p>
-                        Scalar takes a "modest and niched" approach. We don't try to be everything to everyone. Instead, we focus on being the absolute best at what we do: developing robust technology and accelerating growth for our partners. We bring clarity, excellent execution, and ensured satisfaction to every engagement.
+                        We build the operating system for your success, combining these powerful tools with bespoke development where necessary. We bring clarity, excellent execution, and ensured satisfaction to every engagement.
                     </p>
                 </div>
                 
@@ -43,12 +46,12 @@ export const About: React.FC = () => {
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-100 hover:shadow-md transition-shadow">
                     <Target className="w-8 h-8 text-scalar-red mb-4" />
                     <h3 className="font-bold text-lg mb-2">Clarity</h3>
-                    <p className="text-sm text-slate-600">We speak plain language and build clear roadmaps. No ambiguity.</p>
+                    <p className="text-sm text-slate-600">We speak plain language and build clear roadmaps using Notion and Asana.</p>
                 </div>
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-100 hover:shadow-md transition-shadow">
                     <Zap className="w-8 h-8 text-scalar-red mb-4" />
                     <h3 className="font-bold text-lg mb-2">Execution</h3>
-                    <p className="text-sm text-slate-600">We ship. We deliver. We get results on time and on budget.</p>
+                    <p className="text-sm text-slate-600">We ship. We deliver. We use Meti.pro to ensure strategic execution.</p>
                 </div>
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-100 hover:shadow-md transition-shadow">
                     <Award className="w-8 h-8 text-scalar-red mb-4" />

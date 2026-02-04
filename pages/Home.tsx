@@ -21,14 +21,14 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
             <div className="max-w-3xl">
               <div className="inline-flex items-center space-x-2 bg-red-50 px-3 py-1 rounded-full text-xs font-semibold text-scalar-red mb-6 uppercase tracking-wider">
                 <Rocket className="w-3 h-3" />
-                <span>Accelerating Business & Impact</span>
+                <span>Growth Process Consulting</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-serif font-bold text-scalar-dark leading-[1.1] mb-8">
                 Clarity. Execution. <br/>
                 <span className="text-scalar-red">Growth.</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-lg font-light">
-                Scalar is a technology development and growth acceleration firm. We bring world-class tools and top-notch expertise to SMBs, NGOs, and Government projects.
+                Scalar is a growth process consulting and technology development firm. We align your strategy with execution using <strong>Meti.pro</strong>, while streamlining operations with <strong>Asana</strong> and <strong>Notion</strong> to accelerate results for SMBs, NGOs, and Government projects.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" onClick={onOpenConsultation} className="rounded shadow-lg shadow-red-100">
@@ -54,7 +54,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
               </div>
               {/* Floating Badge */}
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-xl border border-slate-50 max-w-xs hidden xl:block">
-                  <p className="font-serif italic text-slate-600 text-lg">"The level of clarity Scalar brought to our project was transformative."</p>
+                  <p className="font-serif italic text-slate-600 text-lg">"The clarity Scalar brought to our strategy with Meti.pro was transformative."</p>
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
           <div className="mb-16 text-center max-w-3xl mx-auto">
              <h2 className="text-3xl font-serif font-bold text-scalar-dark mb-4">World-Class Tools. Modest Approach.</h2>
              <p className="text-lg text-slate-600">
-                We believe in getting the work done with excellence. No unnecessary complexity, just clear strategies and robust technology to help you scale.
+                We believe in process over complexity. We deploy proven operational stacks using <strong>Meti.pro</strong> for growth strategy execution, <strong>Asana</strong> for project velocity, and <strong>Notion</strong> for knowledge clarity.
              </p>
           </div>
 
@@ -121,7 +121,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
             <div>
                 <h2 className="text-3xl font-serif font-bold mb-6 text-scalar-dark">Ensured Client Satisfaction</h2>
                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                    We are niched and modest by design. This allows us to bring a level of focus and expertise to your project that large, generalist agencies cannot match. We don't just build technology; we act as your growth partner.
+                    We are niched and modest by design. This allows us to act as your true growth partner. We don't just hand over software; we ensure your team is trained and your processes are optimized using the best tools available.
                 </p>
                 <div className="space-y-8">
                     {TRUST_SIGNALS.map((signal, idx) => (
@@ -170,7 +170,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
                 Ready to accelerate your growth?
             </h2>
             <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-                Whether you need a new digital platform, a government-grade system, or a marketing strategy to scale—we are ready to execute.
+                Whether you need to align your strategy using Meti.pro, optimize workflows with Asana, or build a custom development project—we are ready to execute.
             </p>
             <Button size="lg" onClick={onOpenConsultation} className="bg-white text-scalar-dark hover:bg-slate-100 rounded">
                 Book a Discovery Session

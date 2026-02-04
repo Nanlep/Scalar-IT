@@ -14,8 +14,8 @@ export const Solutions: React.FC<SolutionsProps> = ({ onOpenConsultation }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-serif font-bold text-scalar-dark mb-4">Our Expertise</h1>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                We combine technical excellence with strategic growth services.
-                Here is how we help you succeed.
+                We combine technical development with strategic process consulting.
+                By leveraging <strong>Meti.pro</strong> as a growth execution engine, alongside Asana and Notion, we build the infrastructure for your success.
             </p>
         </div>
       </div>
