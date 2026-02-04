@@ -87,7 +87,7 @@ export const Privacy: React.FC = () => {
                     Scalar IT Ltd.<br />
                     5 Kwaji Close, Maitama<br />
                     Abuja, Nigeria<br />
-                    <a href="mailto:privacy@scalar-it.com" className="text-scalar-red hover:underline mt-2 inline-block">privacy@scalar-it.com</a>
+                    <a href="mailto:privacy@scalarit.pro" className="text-scalar-red hover:underline mt-2 inline-block">privacy@scalarit.pro</a>
                 </address>
             </div>
         </div>

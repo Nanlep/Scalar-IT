@@ -64,7 +64,7 @@ export const ConsultationModal: React.FC<ModalProps> = ({ isOpen, onClose }) => 
       setIsSuccess(true);
     } catch (err: any) {
       console.error("Submission Error:", err);
-      setError(err.message || 'We could not process your request at this moment. Please email hello@scalar.com');
+      setError(err.message || 'We could not process your request at this moment. Please email hello@scalarit.pro');
       setStatusMessage('Error.');
     } finally {
       setIsSubmitting(false);

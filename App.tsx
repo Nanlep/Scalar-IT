@@ -23,7 +23,7 @@ const Careers = () => (
                 We are always looking for exceptional Systems Architects, Security Engineers, and Compliance Officers.
             </p>
             <p className="text-sm font-semibold text-scalar-red">
-                Please submit your CV to careers@scalar-it.com
+                Please submit your CV to careers@scalarit.pro
             </p>
         </div>
     </div>

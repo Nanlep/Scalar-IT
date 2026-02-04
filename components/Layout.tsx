@@ -162,7 +162,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, onOpenConsultation }) 
                 </li>
                 <li className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-scalar-red" />
-                    <a href="mailto:enterprise@scalar-it.com" className="hover:text-white transition-colors">enterprise@scalar-it.com</a>
+                    <a href="mailto:enterprise@scalarit.pro" className="hover:text-white transition-colors">enterprise@scalarit.pro</a>
                 </li>
               </ul>
             </div>

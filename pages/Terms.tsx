@@ -82,7 +82,7 @@ export const Terms: React.FC = () => {
                     Scalar IT Ltd.<br />
                     5 Kwaji Close, Maitama<br />
                     Abuja, Nigeria<br />
-                    <a href="mailto:legal@scalar-it.com" className="text-scalar-red hover:underline mt-2 inline-block">legal@scalar-it.com</a>
+                    <a href="mailto:legal@scalarit.pro" className="text-scalar-red hover:underline mt-2 inline-block">legal@scalarit.pro</a>
                 </address>
             </div>
         </div>
